@@ -15,7 +15,12 @@ class User extends Model
         return $this->hasOne(Profile::class);
     }
 
-    //muchos a muchos
+    //uno a muchos
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 
     public function courses()
     {
@@ -25,6 +30,16 @@ class User extends Model
     public function courseUser()
     {
         return $this->hasMany(CourseUser::class);    
+    }
+
+    public function lessonUser()
+    {
+        return $this->belongsTo(LessonUser::class);
+    }
+
+    public function reactions()
+    {
+        return $this->hasMany(Reaction::class);
     }
 
     public function reviews()
