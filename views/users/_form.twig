@@ -1,0 +1,31 @@
+<div class="col-md-6">
+    <form action="{{BASE}}{{options.process}}" method="post">
+        <div class="form-group">
+            <label for="name">Nombre</label>
+            <input type="text" name="name" class="form-control" id="name" value="{{user.name|default('')}}" aria-describedby="name" placeholder="Ingresa tu nombre">
+            <small id="name" class="form-text text-muted text danger">Ingresa tu nombre</small>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" class="form-control" id="email" value="{{user.email|default('')}}" aria-describedby="email" placeholder="Ingresa tu email">
+            <small id="email" class="form-text text-muted text-danger">Ingresa tu email.</small>
+        </div>
+        {% if options.action == 'create' %}
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" class="form-control" id="password" placeholder="Tu password">
+                <small id="password" class="form-text text-muted text-danger">Ingresa tu password.</small>
+            </div>
+            <div class="form-group">
+                <label for="repassword">Confirmar Password</label>
+                <input type="password" name="repassword" class="form-control" id="repassword" placeholder="Confirmar password">
+                <small id="password" class="form-text text-muted text-danger">Confirma tu password.</small>
+            </div>
+        {% endif %}
+        
+        <input type="hidden" name="_method" value="PUT">
+        <input type="hidden" name="send" value="{{options.send}}">
+        <button type="submit" class="btn btn-primary">{{options.button}}</button>
+        <a href="{{BASE}}{{options.back.link}}" class="btn btn-link"> {{options.back.name}} </a>
+    </form>
+</div>

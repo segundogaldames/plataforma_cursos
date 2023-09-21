@@ -1,11 +1,11 @@
 {% extends "layout/admin/template.twig" %}
 {% block title %}
-	{{title}}
+	{{options.title}}
 {% endblock %}
 
 {% block content %}
-	<div
-		class="container-fluid">
+	{% include 'layout/admin/header_content.twig' %}
+	<div class="container-fluid">
 		<!-- Small boxes (Stat box) -->
 		<div class="row">
 			<div

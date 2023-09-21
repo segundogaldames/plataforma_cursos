@@ -133,7 +133,7 @@ class Controller
 		if (is_array($data)) {
 			foreach ($data as $data=>$value) {
 				if ($value == '' || $value == 0) {
-					$error = "El campo <strong>$data</strong> es obligatorio";
+					$error = "El campo $data es obligatorio";
 				}
 
 				if (isset($error)) {

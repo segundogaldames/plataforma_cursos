@@ -9,8 +9,17 @@ class adminController extends Controller
     public function index()
     {
         list($msg_success, $msg_error) = $this->getMessages();
-        $title = 'Panel de Administración';
 
-		$this->_view->load('admin/index', compact('title'));    
+        $options = [
+            'title' => 'Administracion',
+            'subject' => 'Panel de Administración',
+            'root_link' => [
+                'name' => 'Admin',
+                'link' => 'admin/index'
+            ],
+            'current_link' => 'Admin', 
+        ];
+
+		$this->_view->load('admin/index', compact('options'));    
     }
 }
