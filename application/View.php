@@ -19,14 +19,10 @@ class View
 		$route_template = ROOT . 'views' . DS;
 		$twig = new Environment(new FilesystemLoader('views/'));
 		$twig->addGlobal('BASE', BASE_URL);
+		$twig->addGlobal('session', $_SESSION);
 
 		//print_r($twig);exit;
 
 		echo $twig->render($view . '.twig', $params);
-		
-
-		// $this->assign('_acl', $this->_acl);
-		// $this->assign('_layoutParams', $_params);
-		// $this->display('template.tpl');
 	}
 }

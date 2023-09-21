@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="frame de aplicaciones web">
+
+    <title>
+      {% block title %}{% endblock %}
+    </title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 
+    {% include 'layout/admin/link_css.twig' %}
+
+
+  </head>
+    <body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+      <div class="preloader flex-column justify-content-center align-items-center">
+        <img class="animation__shake" src="{{BASE}}views/layout/admin/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+      </div>
+      {% include 'layout/admin/menu.twig' %}
+      {% include 'layout/admin/sidebar.twig' %}
+      
+      <div class="content-wrapper">
+        {% include 'layout/admin/header_content.twig' %}
+        <section class="content">
+          {% block content %}{% endblock %}
+        </section>
+      </div>
+      
+      {% include 'layout/admin/footer.twig' %}
+    </div>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+
+    {% include 'layout/admin/link_js.twig' %}
+
+    <noscript>
+      <p>Debe tener el soporte de Javascript habilitado</p>
+    </noscript>
+
+  </body>
+</html>

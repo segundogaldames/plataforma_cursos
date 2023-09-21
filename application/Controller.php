@@ -53,6 +53,9 @@ class Controller
 	#mensajes de exito
 	#mensajes de error
 	protected  function getMessages(){
+		$msg_success = '';
+		$msg_error = '';
+
 		if (Session::get('msg_success')) {
 			$msg_success = Session::get('msg_success');
 			Session::destroy('msg_success');
@@ -62,6 +65,8 @@ class Controller
 			$msg_error = Session::get('msg_error');
 			Session::destroy('msg_error');
 		}
+
+		return [$msg_success, $msg_error];
 	}
 
 	#metodo alternativo para recuperar modelos
