@@ -1,0 +1,94 @@
+{% extends "layout/admin/template.twig" %}
+{% block title %}
+	{{options.title}}
+{% endblock %}
+
+{% block content %}
+	{% include 'layout/admin/header_content.twig' %}
+	<div class="container-fluid">
+		{% include "partials/_messages.twig" %}
+		<div class="card">
+			<div class="card-header">
+				{{options.subject}}
+			</div>
+			<div class="card-body">
+				<div class="col-md-6">
+					<table class="table table-hover">
+						<tr>
+							<th>Nombre:</th>
+							<td>
+								{{course.title}}
+							</td>
+						</tr>
+						<tr>
+							<th>Subtítulo:</th>
+							<td>
+								{{course.subtitle}}
+							</td>
+						</tr>
+						<tr>
+							<th>Descripción:</th>
+							<td>
+								{{course.description}}
+							</td>
+						</tr>
+						<tr>
+							<th>Status:</th>
+							<td>
+								{% if course.status == 1 %}
+									Pendiente
+								{% else %}
+									{% if course.status == 2 %}
+										Validado
+									{% else %}
+										Publicado
+									{% endif %}
+								{% endif %}
+							</td>
+						</tr>
+                        <tr>
+							<th>Profesor:</th>
+							<td>
+								{{course.user.name}}
+							</td>
+						</tr>
+                        <tr>
+							<th>Nivel:</th>
+							<td>
+								{{course.level.name}}
+							</td>
+						</tr>
+                        <tr>
+							<th>Categoría:</th>
+							<td>
+								{{course.category.name}}
+							</td>
+						</tr>
+                        <tr>
+							<th>Precio:</th>
+							<td>
+								$ {{course.price.value}}
+							</td>
+						</tr>
+						<tr>
+							<th>Creado:</th>
+							<td>
+								{{course.created_at|date('d-m-Y H:i:s')}}
+							</td>
+						</tr>
+						<tr>
+							<th>Creado:</th>
+							<td>
+								{{course.updated_at|date('d-m-Y H:i:s')}}
+							</td>
+						</tr>
+					</table>
+					<p>
+						<a href="{{BASE}}{{options.back.link}}">{{options.back.name}}</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /.container-fluid -->
+{% endblock %}

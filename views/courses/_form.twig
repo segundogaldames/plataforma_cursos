@@ -1,0 +1,54 @@
+<div class="col-md-6">
+    <form action="{{BASE}}{{options.process}}" method="post">
+        <div class="form-group">
+            <label for="title">Título</label>
+            <input type="text" name="title" class="form-control" id="title" value="{{course.title|default('')}}" aria-describedby="title" placeholder="Ingresa el título del curso">
+            <small id="title" class="form-text text-danger">Ingresa el título del curso</small>
+        </div>
+        <div class="form-group">
+            <label for="subtitle">Subtítulo</label>
+            <input type="text" name="subtitle" class="form-control" id="subtitle" value="{{course.subtitle|default('')}}" aria-describedby="subtitle" placeholder="Ingresa el subtítulo del curso">
+            <small id="subtitle" class="form-text text-danger">Ingresa el subtítulo del curso</small>
+        </div>
+        <div class="form-group">
+            <label for="description">Descripción</label>
+            <textarea name="description" id="description" class="form-control" rows="4" aria-describedby="description" placeholder="Ingresa la descripción del curso">{{course.title|default('')}}</textarea>
+            <small id="description" class="form-text text-danger">Ingresa la descripción del curso</small>
+        </div>
+        <div class="form-group">
+            <label for="category">Nivel</label>
+            <select name="level" id="level" class="form-control">
+                <option value="">Seleccione...</option>
+                {% for level in levels %}
+                    <option value="{{level.id}}">{{level.name}}</option>
+                {% endfor %}
+            </select>
+            <small id="level" class="form-text text-danger">Seleccione el nivel del curso</small>
+        </div>
+        <div class="form-group">
+            <label for="category">Categoría</label>
+            <select name="category" id="category" class="form-control">
+                <option value="">Seleccione...</option>
+                {% for category in categories %}
+                    <option value="{{category.id}}">{{category.name}}</option>
+                {% endfor %}
+            </select>
+            <small id="category" class="form-text text-danger">Seleccione la categoría del curso</small>
+        </div>
+        <div class="form-group">
+            <label for="price">Precio</label>
+            <select name="price" id="price" class="form-control">
+                <option value="">Seleccione...</option>
+                {% for price in prices %}
+                    <option value="{{price.id}}">{{price.name}}</option>
+                {% endfor %}
+            </select>
+            <small id="price" class="form-text text-danger">Seleccione el precio del curso</small>
+        </div>
+        
+        <input type="hidden" name="_method" value="PUT">
+        <input type="hidden" name="send" value="{{options.send}}">
+        <button type="submit" class="btn btn-primary">{{options.button}}</button>
+        <a href="{{BASE}}{{options.back.link}}" class="btn btn-link"> {{options.back.name}} </a>
+    </form>
+</div>

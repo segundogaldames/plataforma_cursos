@@ -13,6 +13,6 @@ class indexController extends Controller
 	{
 		list($msg_success, $msg_error) = $this->getMessages();
 
-		$this->_view->load('index/index');
+		$this->_view->load('index/index', compact('msg_success','msg_error'));
 	}
 }

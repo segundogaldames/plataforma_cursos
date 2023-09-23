@@ -1,17 +1,147 @@
 {% extends "layout/default/template.twig" %}
-{% block title %}Plataforma Cursos{% endblock %}
+{% block title %}Plataforma Cursos
+{% endblock %}
 
 {% block content %}
-    <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-secondary">Bienvenidos a AxiomaFrame</h1>
-        <p class="lead text-muted">Una propuesta de desarrollo de software simple, escalable, basado en buenas prácticas de programación y el uso de MVC (Modelo-vista-Controlador) como patrón de diseño.</p>
-        <p>
-        <p class="lead text-muted">Te ofrecemos una manera sencilla de crear software altamente escalable a partir de configuraciones mínimas, pero si tu proyecto crece, podrás utilizar todas las herramientas que desees.</p>
-        <p>
-        <p class="lead text-muted"><strong>AxiomaFrame</strong>... sencillamente simple.</p>
-        <p>
-            <a href="https://github.com/segundogaldames/axiomaframe/blob/main/README.md" target="_blank" class="btn btn-secondary my-2">Mas Información</a>
-            <a href="https://github.com/segundogaldames/axiomaframe/blob/main/DOCUMENT.md" target="_blank" class="btn btn-secondary my-2">Documentación</a>
-        </p>
-    </div>
+	<section style="background-image:url('{{BASE}}views/layout/default/img/home.jpg');background-size:cover;background-position-y:0%; height:29rem" class="py-5">
+		<div class="col-md-6 col-lg-8 col-sm-12" style="margin-top:6rem">
+			<h1 class="text-light" style="margin-left:1.2rem; font-size:2rem">Domina la tecnología con nuestra plataforma</h1>
+			<p class="text-warning" style="margin-left:1.2rem; font-size:1.1rem">En esta plataforma tendras todo lo necesario para aprender a través de nuestros excelentes cursos preparados por un equipo con experiencia y pasión por enseñar
+			</p>
+		</div>
+		<div class="col-md-6 col-lg-8 col-sm-12 mx-3">
+			<form class="form-inline">
+				<div class="row g-1">
+					<div class="form-group col-9">
+						<input type="password" class="form-control" id="inputPassword2" placeholder="Buscar">
+					</div>
+					<div class="form-group col-3">
+						<button type="submit" class="btn btn-outline-primary mb-2">Buscar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</section>
+	<section class="mt-5">
+    
+		<div class="container ">
+			<h1 class="text-muted text-center mb-3">Contenidos</h1>
+			<div class="row g-1 d-flex justify-content-between">
+				<div class="card col-md-3 col-lg-2 mx-1 my-1">
+					<img src="{{BASE}}views/layout/default/img/curso1.jpg" class="card-img-top h-30" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">Título de la tarjeta</h5>
+						<p class="card-text" style="font-size:0.9rem">Un texto de ejemplo rápido para colocal cerca del título de la tarjeta y componer la mayor parte del contenido de la tarjeta.</p>
+						<a href="#" class="btn btn-primary">Ir a algún lugar</a>
+					</div>
+				</div>
+				<div class="card col-md-3 col-lg-2 mx-1 my-1">
+					<img src="{{BASE}}views/layout/default/img/curso2.jpg" class="card-img-top h-30" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">Título de la tarjeta</h5>
+						<p class="card-text" style="font-size:0.9rem">Un texto de ejemplo rápido para colocal cerca del título de la tarjeta y componer la mayor parte del contenido de la tarjeta.</p>
+						<a href="#" class="btn btn-primary">Ir a algún lugar</a>
+					</div>
+				</div>
+				<div class="card col-md-3 col-lg-2 mx-1 my-1">
+					<img src="{{BASE}}views/layout/default/img/curso3.jpg" class="card-img-top h-30" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">Título de la tarjeta</h5>
+						<p class="card-text" style="font-size:0.9rem">Un texto de ejemplo rápido para colocal cerca del título de la tarjeta y componer la mayor parte del contenido de la tarjeta.</p>
+						<a href="#" class="btn btn-primary">Ir a algún lugar</a>
+					</div>
+				</div>
+				<div class="card col-md-3 col-lg-2 mx-1 my-1">
+					<img src="{{BASE}}views/layout/default/img/curso4.jpg" class="card-img-top h-30" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">Título de la tarjeta</h5>
+						<p class="card-text" style="font-size:0.9rem">Un texto de ejemplo rápido para colocal cerca del título de la tarjeta y componer la mayor parte del contenido de la tarjeta.</p>
+						<a href="#" class="btn btn-primary">Ir a algún lugar</a>
+					</div>
+				</div>
+				<div class="card col-md-3 col-lg-2 mx-1 my-1">
+					<img src="{{BASE}}views/layout/default/img/curso5.jpg" class="card-img-top h-30" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">Título de la tarjeta</h5>
+						<p class="card-text" style="font-size:0.9rem">Un texto de ejemplo rápido para colocal cerca del título de la tarjeta y componer la mayor parte del contenido de la tarjeta.</p>
+						<a href="#" class="btn btn-primary">Ir a algún lugar</a>
+					</div>
+				</div>
+				<div class="card col-md-3 col-lg-2 mx-1 my-1">
+					<img src="{{BASE}}views/layout/default/img/curso6.jpg" class="card-img-top h-30" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">Título de la tarjeta</h5>
+						<p class="card-text" style="font-size:0.9rem">Un texto de ejemplo rápido para colocal cerca del título de la tarjeta y componer la mayor parte del contenido de la tarjeta.</p>
+						<a href="#" class="btn btn-primary">Ir a algún lugar</a>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</section>
+    <section class="mt-2 py-3 bg-dark">
+        <h1 class="text-light text-center">¿Qué cursos quieres seleccionar?</h1>
+        <p class="text-center text-light">Selecciona el curso que mejor cumpla tus necesidades</p>
+        <div class="d-flex justify-content-center">
+            <a href="{{BASE}}courses/courses" class="btn btn-outline-danger">Catálogo de Cursos</a>
+        </div>
+    </section>
+    <section class="mt-5">
+        <div class="container ">
+            <h1 class="text-center text-muted">Últimos Cursos</h1>
+            <p class="text-center mb-3">Trabajamos duro para que no te falte ningún curso</p>
+			<div class="row g-1 d-flex justify-content-between">
+				<div class="card col-md-3 col-lg-2 mx-1 my-1">
+					<img src="{{BASE}}views/layout/default/img/curso1.jpg" class="card-img-top h-30" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">Título de la tarjeta</h5>
+						<p class="card-text" style="font-size:0.9rem">Un texto de ejemplo rápido para colocal cerca del título de la tarjeta y componer la mayor parte del contenido de la tarjeta.</p>
+						<a href="#" class="btn btn-primary">Ir a algún lugar</a>
+					</div>
+				</div>
+				<div class="card col-md-3 col-lg-2 mx-1 my-1">
+					<img src="{{BASE}}views/layout/default/img/curso2.jpg" class="card-img-top h-30" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">Título de la tarjeta</h5>
+						<p class="card-text" style="font-size:0.9rem">Un texto de ejemplo rápido para colocal cerca del título de la tarjeta y componer la mayor parte del contenido de la tarjeta.</p>
+						<a href="#" class="btn btn-primary">Ir a algún lugar</a>
+					</div>
+				</div>
+				<div class="card col-md-3 col-lg-2 mx-1 my-1">
+					<img src="{{BASE}}views/layout/default/img/curso3.jpg" class="card-img-top h-30" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">Título de la tarjeta</h5>
+						<p class="card-text" style="font-size:0.9rem">Un texto de ejemplo rápido para colocal cerca del título de la tarjeta y componer la mayor parte del contenido de la tarjeta.</p>
+						<a href="#" class="btn btn-primary">Ir a algún lugar</a>
+					</div>
+				</div>
+				<div class="card col-md-3 col-lg-2 mx-1 my-1">
+					<img src="{{BASE}}views/layout/default/img/curso4.jpg" class="card-img-top h-30" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">Título de la tarjeta</h5>
+						<p class="card-text" style="font-size:0.9rem">Un texto de ejemplo rápido para colocal cerca del título de la tarjeta y componer la mayor parte del contenido de la tarjeta.</p>
+                        
+						<a href="#" class="btn btn-primary">Ir a algún lugar</a>
+					</div>
+				</div>
+				<div class="card col-md-3 col-lg-2 mx-1 my-1">
+					<img src="{{BASE}}views/layout/default/img/curso5.jpg" class="card-img-top h-30" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">Título de la tarjeta</h5>
+						<p class="card-text" style="font-size:0.9rem">Un texto de ejemplo rápido para colocal cerca del título de la tarjeta y componer la mayor parte del contenido de la tarjeta.</p>
+						<a href="#" class="btn btn-primary">Ir a algún lugar</a>
+					</div>
+				</div>
+				<div class="card col-md-3 col-lg-2 mx-1 my-1">
+					<img src="{{BASE}}views/layout/default/img/curso6.jpg" class="card-img-top h-30" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">Título de la tarjeta</h5>
+						<p class="card-text" style="font-size:0.9rem">Un texto de ejemplo rápido para colocal cerca del título de la tarjeta y componer la mayor parte del contenido de la tarjeta.</p>
+						<a href="#" class="btn btn-primary">Ir a algún lugar</a>
+					</div>
+				</div>
+			</div>
+
+		</div>
+    </section>
 {% endblock %}

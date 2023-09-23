@@ -1,0 +1,14 @@
+<div class="col-md-6">
+    <form action="{{BASE}}{{options.process}}" method="post">
+        <div class="form-group">
+            <label for="name">Nombre</label>
+            <input type="text" name="name" class="form-control" id="name" value="{{level.name|default('')}}" aria-describedby="name" placeholder="Ingresa el nombre del nivel">
+            <small id="name" class="form-text text-danger">Ingresa el nombre del nivel</small>
+        </div>
+        
+        <input type="hidden" name="_method" value="PUT">
+        <input type="hidden" name="send" value="{{options.send}}">
+        <button type="submit" class="btn btn-primary">{{options.button}}</button>
+        <a href="{{BASE}}{{options.back.link}}" class="btn btn-link"> {{options.back.name}} </a>
+    </form>
+</div>

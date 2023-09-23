@@ -1,0 +1,18 @@
+<div class="col-md-6">
+    <form action="{{BASE}}{{options.process}}" method="post">
+        <div class="form-group">
+            <label for="name">Nombre</label>
+            <input type="text" name="name" class="form-control" id="name" value="{{price.name|default('')}}" aria-describedby="name" placeholder="Ingresa el nombre asociado al precio">
+            <small id="name" class="form-text text-danger">Ingresa el nombre asociado al precio</small>
+        </div>
+        <div class="form-group">
+            <label for="price">Precio</label>
+            <input type="number" name="value" class="form-control" id="price" value="{{price.value|default('')}}" aria-describedby="price" placeholder="Ingresa el valor del precio">
+            <small id="price" class="form-text text-danger">Ingresa el valor del precio</small>
+        </div>
+        <input type="hidden" name="_method" value="PUT">
+        <input type="hidden" name="send" value="{{options.send}}">
+        <button type="submit" class="btn btn-primary">{{options.button}}</button>
+        <a href="{{BASE}}{{options.back.link}}" class="btn btn-link"> {{options.back.name}} </a>
+    </form>
+</div>
