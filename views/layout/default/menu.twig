@@ -17,10 +17,21 @@
 				Acceder
 				</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-				<a class="dropdown-item text-primary" href="#">Login</a>
-				<a class="dropdown-item text-primary" href="#">Registro</a>
+				<a class="dropdown-item text-primary" href="{{BASE}}login/login">Login</a>
+				<a class="dropdown-item text-primary" href="{{BASE}}users/create">Registro</a>
 				</div>
 			</li>
+			{% if session.authenticate %}
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle text-primary" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					{{session.user_name}}
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<a class="dropdown-item text-primary" href="{{BASE}}">Perfil</a>
+					<a class="dropdown-item text-primary" href="{{BASE}}login/logout">Cerrar Sesion</a>
+					</div>
+				</li>
+			{% endif %}
 		</ul>
 	</div>
 </nav>

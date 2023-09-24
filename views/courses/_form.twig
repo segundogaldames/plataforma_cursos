@@ -16,8 +16,11 @@
             <small id="description" class="form-text text-danger">Ingresa la descripción del curso</small>
         </div>
         <div class="form-group">
-            <label for="category">Nivel</label>
+            <label for="level">Nivel</label>
             <select name="level" id="level" class="form-control">
+                {% if options.action == 'edit' %}
+                    <option value="{{course.level_id}}">{{course.level.name}} </option>
+                {% endif %}
                 <option value="">Seleccione...</option>
                 {% for level in levels %}
                     <option value="{{level.id}}">{{level.name}}</option>
@@ -28,6 +31,9 @@
         <div class="form-group">
             <label for="category">Categoría</label>
             <select name="category" id="category" class="form-control">
+                {% if options.action == 'edit' %}
+                    <option value="{{course.category_id}}">{{course.category.name}} </option>
+                {% endif %}
                 <option value="">Seleccione...</option>
                 {% for category in categories %}
                     <option value="{{category.id}}">{{category.name}}</option>
@@ -38,6 +44,9 @@
         <div class="form-group">
             <label for="price">Precio</label>
             <select name="price" id="price" class="form-control">
+                {% if options.action == 'edit' %}
+                    <option value="{{course.price_id}}">{{course.price.name}} </option>
+                {% endif %}
                 <option value="">Seleccione...</option>
                 {% for price in prices %}
                     <option value="{{price.id}}">{{price.name}}</option>
@@ -45,6 +54,27 @@
             </select>
             <small id="price" class="form-text text-danger">Seleccione el precio del curso</small>
         </div>
+
+        {% if options.action == 'edit' %}
+            <div class="form-group">
+            <label for="status">Status</label>
+            <select name="status" id="status" class="form-control">
+               {% if course.status == 1 %}
+                    <option value="1">Pendiente</option>
+                    <option value="2">Aprobar</option>
+                {% else %}
+                    {% if course.status == 2 %}
+                        <option value="2">Aprobado</option>
+                        <option value="3">Publicar</option>
+                    {% else %}
+                        <option value="3">Publicado</option>
+                        <option value="2">Aprobar</option>
+                    {% endif %}
+               {% endif %}
+            </select>
+            <small id="price" class="form-text text-danger">Seleccione el status del curso</small>
+        </div>
+        {% endif %}
         
         <input type="hidden" name="_method" value="PUT">
         <input type="hidden" name="send" value="{{options.send}}">

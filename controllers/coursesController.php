@@ -95,9 +95,9 @@ final class coursesController extends Controller
         $course->status = 1; //pendiente
         $course->slug = Helper::friendlyRoute(Filter::getText('title'));
         $course->user_id = Session::get('user_id');
-        $course->level = Filter::getInt('level');
-        $course->category = Filter::getInt('category');
-        $course->price = Filter::getInt('price');
+        $course->level_id = Filter::getInt('level');
+        $course->category_id = Filter::getInt('category');
+        $course->price_id = Filter::getInt('price');
         $course->save();
 
         Session::destroy('data');
@@ -162,14 +162,14 @@ final class coursesController extends Controller
 
     public function update($id = null)
     {
-        $this->validateForm("courses/create", [
+        $this->validateForm("courses/edit/{$id}", [
             'title' => Filter::getText('title'),
             'subtitle' => Filter::getText('subtitle'),
             'description' => Filter::getText('description'),
-            'status' => Filter::getText('status'),
             'level' => Filter::getText('level'),
             'category' => Filter::getText('category'),
-            'price' => Filter::getText('price')
+            'price' => Filter::getText('price'),
+            'status' => Filter::getText('status'),
         ]);
 
         $course = Course::find(Filter::filterInt($id));
@@ -178,9 +178,9 @@ final class coursesController extends Controller
         $course->description = Filter::getText('description');
         $course->status = Filter::getInt('status');
         $course->slug = Helper::friendlyRoute(Filter::getText('title'));
-        $course->level = Filter::getInt('level');
-        $course->category = Filter::getInt('category');
-        $course->price = Filter::getInt('price');
+        $course->level_id = Filter::getInt('level');
+        $course->category_id = Filter::getInt('category');
+        $course->price_id = Filter::getInt('price');
         $course->save();
 
         Session::destroy('data');

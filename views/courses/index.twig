@@ -17,18 +17,18 @@
 					<table class="table table-hover">
 						<thead>
 							<tr>
-								<th class="col-10">Título</th>
-                                <th class="col-10">Status</th>
-                                <th class="col-10">Profesor</th>
-                                <th class="col-10">Nivel</th>
-                                <th class="col-10">Categoría</th>
+								<th class="col-4">Título</th>
+                                <th class="col-1">Status</th>
+                                <th class="col-2">Profesor</th>
+                                <th class="col-1">Nivel</th>
+                                <th class="col-2">Categoría</th>
                                 <th class="col-2">Acciones</th>
 							</tr>
 						</thead>
 						<tbody>
 							{% for model in courses %}
 								<tr>
-									<td> {{model.name}} </td>
+									<td> {{model.title}} </td>
                                     <td>
                                         {% if model.status == 1 %}
                                             Pendiente

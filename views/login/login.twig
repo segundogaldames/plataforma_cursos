@@ -1,0 +1,29 @@
+{% extends "layout/default/template.twig" %}
+{% block title %}Plataforma Cursos
+{% endblock %}
+
+{% block content %}
+	<section class="mt-5">
+		<div class="col-md-6 offset-md-3">
+			<form action="{{BASE}}{{options.process}}" method="post">
+				<div class="form-group">
+					<label for="email">Email</label>
+					<input type="email" name="email" class="form-control" id="email" aria-describedby="email" placeholder="Ingresa tu email">
+					<small id="email" class="form-text text-muted text-danger">Ingresa tu email.</small>
+				</div>
+
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input type="password" name="password" class="form-control" id="password" placeholder="Tu password">
+					<small id="password" class="form-text text-muted text-danger">Ingresa tu password.</small>
+				</div>
+
+				<input type="hidden" name="send" value="{{options.send}}">
+				<button type="submit" class="btn btn-primary">{{options.button}}</button>
+				<a href="{{BASE}}{{options.back.link}}" class="btn btn-link">
+					{{options.back.name}}
+				</a>
+			</form>
+		</div>
+	</div>
+{% endblock %}
