@@ -16,19 +16,29 @@
                     <table class="table table-hover">
                         <tr>
                             <th>Nombre:</th>
-                            <td> {{category.name}} </td>
+                            <td> {{goal.name}} </td>
+                        </tr>
+                        <tr>
+                            <th>Curso:</th>
+                            <td> {{goal.course.title}} </td>
                         </tr>
                         <tr>
                             <th>Creado:</th>
-                            <td> {{category.created_at|date('d-m-Y H:i:s')}} </td>
+                            <td> {{goal.created_at|date('d-m-Y H:i:s')}} </td>
                         </tr>
                         <tr>
                             <th>Creado:</th>
-                            <td> {{category.updated_at|date('d-m-Y H:i:s')}} </td>
+                            <td> {{goal.updated_at|date('d-m-Y H:i:s')}} </td>
                         </tr>
                     </table>
                     <p>
                         <a href="{{BASE}}{{options.back.link}}" class="btn btn-primary btn-sm">{{options.back.name}}</a>
+                        <a href="{{BASE}}goals/edit/{{goal.id}}" class="btn btn-warning btn-sm">Editar</a>
+                    </p>
+                    <p>
+                        <form method="post" action="{{BASE}}goals/delete/{{goal.id}}">
+                            <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>
+                        </form>
                     </p>
                 </div>
 			</div>

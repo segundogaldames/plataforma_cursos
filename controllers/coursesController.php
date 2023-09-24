@@ -124,7 +124,7 @@ final class coursesController extends Controller
             'current_link' => 'Show',
         ];
 
-        $course = Course::with(['user','level','category','price'])->find(Filter::filterInt($id));
+        $course = Course::with(['user','level','category','price','goals'])->find(Filter::filterInt($id));
 
         $this->_view->load('courses/show', compact('options','course','msg_success','msg_error'));
     }

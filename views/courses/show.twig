@@ -71,6 +71,20 @@
 							</td>
 						</tr>
 						<tr>
+							<th>Metas:</th>
+							<td>
+								{% if course.goals is not empty %}
+									<div class="list-group">
+										{% for goal in course.goals %}
+											<a href="{{BASE}}goals/show/{{goal.id}}" class="list-group-item list-group-item-action">{{goal.name}}</a>
+										{% endfor %}
+									</div>
+								{% else %}
+									<p class="text-info">No hay metas definidas</p>
+								{% endif %}
+							</td>
+						</tr>
+						<tr>
 							<th>Creado:</th>
 							<td>
 								{{course.created_at|date('d-m-Y H:i:s')}}
@@ -84,7 +98,8 @@
 						</tr>
 					</table>
 					<p>
-						<a href="{{BASE}}{{options.back.link}}">{{options.back.name}}</a>
+						<a href="{{BASE}}{{options.back.link}}" class="btn btn-primary btn-sm">{{options.back.name}}</a>
+						<a href="{{BASE}}goals/create/{{course.id}}" class="btn btn-success btn-sm">Agregar Meta</a>
 					</p>
 				</div>
 			</div>
