@@ -75,6 +75,7 @@ final class categoriesController extends Controller
 
         $category = new Category;
         $category->name = Filter::getText('name');
+        $category->ruta = Helper::friendlyRoute(Filter::getText('name'));
         $category->save();
 
         Session::destroy('data');
@@ -144,6 +145,7 @@ final class categoriesController extends Controller
 
         $category = Category::find(Filter::filterInt($id));
         $category->name = Filter::getText('name');
+        $category->ruta = Helper::friendlyRoute(Filter::getText('name'));
         $category->save();
 
         Session::destroy('data');

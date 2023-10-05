@@ -75,6 +75,7 @@ final class levelsController extends Controller
 
         $level = new Level;
         $level->name = Filter::getText('name');
+        $level->ruta = Helper::friendlyRoute(Filter::getText('name'));
         $level->save();
 
         Session::destroy('data');
@@ -144,6 +145,7 @@ final class levelsController extends Controller
 
         $level = Level::find(Filter::filterInt($id));
         $level->name = Filter::getText('name');
+        $level->ruta = Helper::friendlyRoute(Filter::getText('name'));
         $level->save();
 
         Session::destroy('data');

@@ -1,37 +1,98 @@
-<nav class="navbar navbar-expand-lg navbar-light px-2" style="background-color:#81BEF7">
-	<a class="navbar-brand text-primary" href="{{BASE}}">Cursos</a>
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	</button>
+<nav class="bg-gray-800">
+  <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+    <div class="relative flex h-16 items-center justify-between">
+      <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+        <!-- Mobile menu button-->
+        <button type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+          <span class="absolute -inset-0.5"></span>
+          <span class="sr-only">Open main menu</span>
+          <!--
+            Icon when menu is closed.
 
-	<div class="collapse navbar-collapse" id="navbarSupportedContent">
-		<ul class="navbar-nav mr-auto">
-			<li class="nav-item active">
-				<a class="nav-link text-primary" href="{{BASE}}">Home <span class="sr-only"></span></a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link text-primary" href="{{BASE}}courses/courses">Cursos</a>
-			</li>
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle text-primary" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				Acceder
-				</a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-				<a class="dropdown-item text-primary" href="{{BASE}}login/login">Login</a>
-				<a class="dropdown-item text-primary" href="{{BASE}}users/create">Registro</a>
-				</div>
-			</li>
+            Menu open: "hidden", Menu closed: "block"
+          -->
+          <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          </svg>
+          <!--
+            Icon when menu is open.
+
+            Menu open: "block", Menu closed: "hidden"
+          -->
+          <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+        <div class="flex flex-shrink-0 items-center">
+          <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
+        </div>
+        <div class="hidden sm:ml-6 sm:block">
+          <div class="flex space-x-4">
+            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+            <a href="{{BASE}}" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</a>
+            <a href="{{BASE}}courses/courses" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Cursos</a>
+            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Contacto</a>
+            <a href="{{BASE}}login/login" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Login</a>
+			<a href="{{BASE}}users/create" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Registro</a>
 			{% if session.authenticate %}
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle text-primary" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					{{session.user_name}}
-					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item text-primary" href="{{BASE}}">Perfil</a>
-					<a class="dropdown-item text-primary" href="{{BASE}}login/logout">Cerrar Sesion</a>
-					</div>
-				</li>
+				<!-- component -->
+				<div class="group inline-block">
+					<button class="outline-none focus:outline-none px-3 py-2 flex items-center min-w-32">
+						<span class="pr-1 text-sm font-medium flex-1 text-gray-300">{{session.user_name}}</span>
+						<span>
+							<svg
+								class="text-white fill-current h-4 w-4 transform group-hover:-rotate-180
+								transition duration-150 ease-in-out"
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 20 20"
+							>
+								<path
+								d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+								/>
+							</svg>
+						</span>
+					</button>
+					<ul class="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute 
+						transition duration-150 ease-in-out origin-top min-w-32">
+						<li class="rounded-sm px-3 py-1 hover:bg-gray-100">
+							<a href="">Mi Perfil</a>
+						</li>
+						
+						<li class="rounded-sm px-3 py-1 hover:bg-gray-100">
+							<a href="{{BASE}}login/logout">Cerrar Sesión</a>
+						</li>
+					</ul>
+				</div>
 			{% endif %}
-		</ul>
-	</div>
+			
+
+			<style>
+			/* since nested groupes are not supported we have to use 
+				regular css for the nested dropdowns 
+			*/
+			li>ul                 { transform: translatex(100%) scale(0) }
+			li:hover>ul           { transform: translatex(101%) scale(1) }
+			li > button svg       { transform: rotate(-90deg) }
+			li:hover > button svg { transform: rotate(-270deg) }
+
+			/* Below styles fake what can be achieved with the tailwind config
+				you need to add the group-hover variant to scale and define your custom
+				min width style.
+				See https://codesandbox.io/s/tailwindcss-multilevel-dropdown-y91j7?file=/index.html
+				for implementation with config file
+			*/
+			.group:hover .group-hover\:scale-100 { transform: scale(1) }
+			.group:hover .group-hover\:-rotate-180 { transform: rotate(180deg) }
+			.scale-0 { transform: scale(0) }
+			.min-w-32 { min-width: 8rem }
+			</style>
+          </div>
+		  
+        </div>
+      </div>
+      
+    </div>
+  </div>
 </nav>

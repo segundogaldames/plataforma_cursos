@@ -1,0 +1,24 @@
+{
+  "name": "plataforma_cursos",
+  "version": "1.0.0",
+  "description": "## **Resumen** ***AxiomaFrame*** es un pequeño aporte al desarrollo de aplicaciones web. Se trata de un micro framework basado en PHP, implementado bajo el patrón de arquitectura MVC y que tiene como objetivo general, ayudar a los desarrolladores que no tienen tanta experiencia en la programación, a construir aplicaciones en un entorno configurado para conectar bases de datos y un set de herramientas básicas que te permitirán cumplir los objetivos de un proyectos web.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tailRun": "npx tailwindcss -i ./public/css/tailwind.css -o ./public/css/estilos.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/segundogaldames/plataforma_cursos.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/segundogaldames/plataforma_cursos/issues"
+  },
+  "homepage": "https://github.com/segundogaldames/plataforma_cursos#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.3.3"
+  }
+}

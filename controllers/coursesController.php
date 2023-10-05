@@ -38,6 +38,32 @@ final class coursesController extends Controller
     }
 
     //metodo courses para mostrar los cursos activos a los usuarios/clientes
+    public function courses()
+    {
+        list($msg_success, $msg_error) = $this->getMessages();
+
+        $options = [
+            'title' => 'Cursos',
+            'subject' => 'Lista de Cursos',
+            'button' => [
+                'name' => 'Nuevo Curso',
+                'link' => 'courses/create'
+            ],
+            'root_link' => [
+                'name' => 'Admin',
+                'link' => 'admin/index'
+            ],
+            'model_button' => 'courses',
+            'current_link' => 'Course', 
+            'message' => 'No hay cursos registrados'
+        ];
+
+        $courses = Course::with(['user','level','category','price'])->where('status',3)->orderBy('id','desc')->get();
+        $categories = Category::select('id','name','ruta')->orderBy('name')->get();
+        $levels = Level::select('id','name','ruta')->orderBy('name')->get();
+
+        $this->_view->load('courses/courses', compact('options','courses','msg_success','msg_error','categories','levels')); 
+    }
     //metodo coursesLast para mostrar los ultimos 4 cursos activos a clientes
 
     public function create()
@@ -186,5 +212,77 @@ final class coursesController extends Controller
         Session::destroy('data');
         Session::set('msg_success','El curso se ha modificado correctamente');
         $this->redirect('courses/show/' . $id);
+    }
+
+    public function coursesCategory($ruta = null)
+    {
+        list($msg_success, $msg_error) = $this->getMessages();
+
+        $category = Category::select('id')->where('ruta', $ruta)->first();
+        Validate::validateModel(Category::class, $category->id,'error/error');
+
+
+        $options = [
+            'title' => 'Cursos',
+            'subject' => 'Lista de Cursos',
+            'button' => [
+                'name' => 'Nuevo Curso',
+                'link' => 'courses/create'
+            ],
+            'root_link' => [
+                'name' => 'Admin',
+                'link' => 'admin/index'
+            ],
+            'model_button' => 'courses',
+            'current_link' => 'Course', 
+            'message' => 'No hay cursos registrados'
+        ];
+
+        $courses = Course::with(['user','level','category','price'])
+            ->where('status',3)
+            ->where('category_id', $category->id)
+            ->orderBy('id','desc')
+            ->get();
+
+        $categories = Category::select('id','name','ruta')->orderBy('name')->get();
+        $levels = Level::select('id','name')->orderBy('name')->get();
+
+        $this->_view->load('courses/coursesCategory', compact('options','courses','msg_success','msg_error','categories','levels')); 
+    }
+
+    public function coursesLevel($ruta = null)
+    {
+        list($msg_success, $msg_error) = $this->getMessages();
+
+        $level = level::select('id')->where('ruta', $ruta)->first();
+        Validate::validateModel(Level::class, $level->id,'error/error');
+
+
+        $options = [
+            'title' => 'Cursos',
+            'subject' => 'Lista de Cursos',
+            'button' => [
+                'name' => 'Nuevo Curso',
+                'link' => 'courses/create'
+            ],
+            'root_link' => [
+                'name' => 'Admin',
+                'link' => 'admin/index'
+            ],
+            'model_button' => 'courses',
+            'current_link' => 'Course', 
+            'message' => 'No hay cursos registrados'
+        ];
+
+        $courses = Course::with(['user','level','category','price'])
+            ->where('status',3)
+            ->where('level_id', $level->id)
+            ->orderBy('id','desc')
+            ->get();
+
+        $categories = Category::select('id','name','ruta')->orderBy('name')->get();
+        $levels = Level::select('id','name')->orderBy('name')->get();
+
+        $this->_view->load('courses/coursesCategory', compact('options','courses','msg_success','msg_error','categories','levels')); 
     }
 }
