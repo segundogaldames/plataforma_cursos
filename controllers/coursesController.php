@@ -5,6 +5,8 @@ use models\Level;
 use models\Price;
 use models\User;
 
+use JasonGrimes\Paginator;
+
 final class coursesController extends Controller
 {
     public function __construct()
@@ -38,8 +40,9 @@ final class coursesController extends Controller
     }
 
     //metodo courses para mostrar los cursos activos a los usuarios/clientes
-    public function courses()
+    public function courses($page = null)
     {
+        
         list($msg_success, $msg_error) = $this->getMessages();
 
         $options = [
@@ -58,11 +61,50 @@ final class coursesController extends Controller
             'message' => 'No hay cursos registrados'
         ];
 
-        $courses = Course::with(['user','level','category','price'])->where('status',3)->orderBy('id','desc')->get();
+        $page = Filter::filterInt($page);
+        
+        if($page < 1){
+            $page = 1;
+        }
+
+        $rows = Course::with(['user','level','category','price'])->where('status',3)->count();
+        $cant = 3;
+        $indice = ($page-1) * $cant;
+        
+        $courses = Course::with(['user','level','category','price'])->where('status',3)->orderBy('id','desc')->skip($indice)->limit($cant)->get();
+
+        
         $categories = Category::select('id','name','ruta')->orderBy('name')->get();
         $levels = Level::select('id','name','ruta')->orderBy('name')->get();
+        
+        $numPages = ceil($rows / $cant);
 
-        $this->_view->load('courses/courses', compact('options','courses','msg_success','msg_error','categories','levels')); 
+        if ($page > 1) {
+            $num = $page -1;
+            $prevPage = "courses/courses/{$num}";
+        }else{
+            $prevPage = "courses/courses/{$page}";
+        }
+
+        if($page < $numPages)
+        {
+            $num = $page + 1;
+            $nextPage = "courses/courses/{$num}";
+        }else{
+            $nextPage = "courses/courses/{$page}";
+        }
+
+        $pagination = [
+            'total' => $rows,
+            'currentPage' => $page,
+            'numPages' => $numPages,
+            'from' => ($page -1) * $cant + 1,
+            'to' => ($page-1) * $cant + count($courses),
+            'prevPage' => $prevPage,
+            'nextPage' => $nextPage
+        ];
+
+        $this->_view->load('courses/courses', compact('options','courses','msg_success','msg_error','categories','levels','pagination')); 
     }
     //metodo coursesLast para mostrar los ultimos 4 cursos activos a clientes
 

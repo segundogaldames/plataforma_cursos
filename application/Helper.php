@@ -86,6 +86,7 @@ class Helper
         return false;
     }
 
+
     #metodo que crea una password de 10 caracteres de largo
     public static function passGenerator($length = 10)
     {

@@ -141,8 +141,8 @@ class ComposerStaticInit19eadcb169abee4dddaab6fa47ec4e26
         ),
         'Illuminate\\Support\\' => 
         array (
-            0 => __DIR__ . '/..' . '/illuminate/macroable',
-            1 => __DIR__ . '/..' . '/illuminate/collections',
+            0 => __DIR__ . '/..' . '/illuminate/collections',
+            1 => __DIR__ . '/..' . '/illuminate/macroable',
             2 => __DIR__ . '/..' . '/illuminate/support',
         ),
         'Illuminate\\Database\\' => 
@@ -167,6 +167,16 @@ class ComposerStaticInit19eadcb169abee4dddaab6fa47ec4e26
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'J' => 
+        array (
+            'JasonGrimes' => 
+            array (
+                0 => __DIR__ . '/..' . '/jasongrimes/paginator/src',
+            ),
+        ),
+    );
+
     public static $classMap = array (
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
@@ -183,6 +193,7 @@ class ComposerStaticInit19eadcb169abee4dddaab6fa47ec4e26
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit19eadcb169abee4dddaab6fa47ec4e26::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit19eadcb169abee4dddaab6fa47ec4e26::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit19eadcb169abee4dddaab6fa47ec4e26::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit19eadcb169abee4dddaab6fa47ec4e26::$classMap;
 
         }, null, ClassLoader::class);

@@ -3,7 +3,7 @@
         'name' => 'segundogaldames/axiomaframe',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'c952be3774943245dee21865a977af71904ec57b',
+        'reference' => 'e41f97db17563246f5d4d8887ae0501f9c05e741',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -73,6 +73,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'jasongrimes/paginator' => array(
+            'pretty_version' => '1.0.3',
+            'version' => '1.0.3.0',
+            'reference' => '3411e3cd0c6479a0b514f26e4358f0273552f221',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../jasongrimes/paginator',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'nesbot/carbon' => array(
             'pretty_version' => '2.70.0',
             'version' => '2.70.0.0',
@@ -130,7 +139,7 @@
         'segundogaldames/axiomaframe' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'c952be3774943245dee21865a977af71904ec57b',
+            'reference' => 'e41f97db17563246f5d4d8887ae0501f9c05e741',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
