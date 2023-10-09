@@ -1,0 +1,17 @@
+<div class="col-md-6">
+    <form action="{{BASE}}{{options.process}}" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="course">Origen: {{model.title}}</label>
+        </div>
+        <div class="form-group">
+            <label for="image">Imagen</label>
+            <input type="file" name="image" class="form-control" id="image" aria-describedby="name">
+            <small id="image" class="form-text text-danger">Selecciona una imagen</small>
+        </div>
+        
+        <input type="hidden" name="_method" value="PUT">
+        <input type="hidden" name="send" value="{{options.send}}">
+        <button type="submit" class="btn btn-primary">{{options.button}}</button>
+        <a href="{{BASE}}{{options.back.link}}" class="btn btn-link"> {{options.back.name}} </a>
+    </form>
+</div>

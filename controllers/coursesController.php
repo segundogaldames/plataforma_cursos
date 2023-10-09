@@ -1,9 +1,11 @@
 <?php
+
 use models\Course;
 use models\Category;
 use models\Level;
 use models\Price;
 use models\User;
+use models\Image;
 
 use JasonGrimes\Paginator;
 
@@ -30,19 +32,19 @@ final class coursesController extends Controller
                 'link' => 'admin/index'
             ],
             'model_button' => 'courses',
-            'current_link' => 'Course', 
+            'current_link' => 'Course',
             'message' => 'No hay cursos registrados'
         ];
 
-        $courses = Course::with(['user','level','category','price'])->orderBy('id','desc')->get();
+        $courses = Course::with(['user', 'level', 'category', 'price'])->orderBy('id', 'desc')->get();
 
-        $this->_view->load('courses/index', compact('options','courses','msg_success','msg_error'));  
+        $this->_view->load('courses/index', compact('options', 'courses', 'msg_success', 'msg_error'));
     }
 
     //metodo courses para mostrar los cursos activos a los usuarios/clientes
     public function courses($page = null)
     {
-        
+
         list($msg_success, $msg_error) = $this->getMessages();
 
         $options = [
@@ -57,40 +59,46 @@ final class coursesController extends Controller
                 'link' => 'admin/index'
             ],
             'model_button' => 'courses',
-            'current_link' => 'Course', 
+            'current_link' => 'Course',
             'message' => 'No hay cursos registrados'
         ];
 
         $page = Filter::filterInt($page);
-        
-        if($page < 1){
+
+        if ($page < 1) {
             $page = 1;
         }
 
-        $rows = Course::with(['user','level','category','price'])->where('status',3)->count();
+        $rows = Course::with(['user', 'level', 'category', 'price'])->where('status', 3)->count();
         $cant = 3;
-        $indice = ($page-1) * $cant;
-        
-        $courses = Course::with(['user','level','category','price'])->where('status',3)->orderBy('id','desc')->skip($indice)->limit($cant)->get();
+        $indice = ($page - 1) * $cant;
 
-        
-        $categories = Category::select('id','name','ruta')->orderBy('name')->get();
-        $levels = Level::select('id','name','ruta')->orderBy('name')->get();
-        
+        $courses = Course::with(['user', 'level', 'category', 'price'])->where('status', 3)->orderBy('id', 'desc')->skip($indice)->limit($cant)->get();
+
+        foreach ($courses as $course) {
+            $image = Image::select('id', 'image')->where('imageable_id', $course->id)
+                ->where('imageable_type', 'Course')->first();
+            $course->image_id = $image->id;
+            $course->image = $image->image;
+        }
+
+
+        $categories = Category::select('id', 'name', 'ruta')->orderBy('name')->get();
+        $levels = Level::select('id', 'name', 'ruta')->orderBy('name')->get();
+
         $numPages = ceil($rows / $cant);
 
         if ($page > 1) {
-            $num = $page -1;
+            $num = $page - 1;
             $prevPage = "courses/courses/{$num}";
-        }else{
+        } else {
             $prevPage = "courses/courses/{$page}";
         }
 
-        if($page < $numPages)
-        {
+        if ($page < $numPages) {
             $num = $page + 1;
             $nextPage = "courses/courses/{$num}";
-        }else{
+        } else {
             $nextPage = "courses/courses/{$page}";
         }
 
@@ -98,13 +106,13 @@ final class coursesController extends Controller
             'total' => $rows,
             'currentPage' => $page,
             'numPages' => $numPages,
-            'from' => ($page -1) * $cant + 1,
-            'to' => ($page-1) * $cant + count($courses),
+            'from' => ($page - 1) * $cant + 1,
+            'to' => ($page - 1) * $cant + count($courses),
             'prevPage' => $prevPage,
             'nextPage' => $nextPage
         ];
 
-        $this->_view->load('courses/courses', compact('options','courses','msg_success','msg_error','categories','levels','pagination')); 
+        $this->_view->load('courses/courses', compact('options', 'courses', 'msg_success', 'msg_error', 'categories', 'levels', 'pagination'));
     }
     //metodo coursesLast para mostrar los ultimos 4 cursos activos a clientes
 
@@ -131,11 +139,11 @@ final class coursesController extends Controller
         ];
 
         $course = Session::get('data');
-        $levels = Level::select('id','name')->orderBy('name')->get();
-        $categories = Category::select('id','name')->orderBy('name')->get();
-        $prices = Price::select('id','name','value')->orderBy('value')->get();
+        $levels = Level::select('id', 'name')->orderBy('name')->get();
+        $categories = Category::select('id', 'name')->orderBy('name')->get();
+        $prices = Price::select('id', 'name', 'value')->orderBy('value')->get();
 
-        $this->_view->load('courses/create', compact('options','course','msg_success','msg_error','levels','categories','prices'));
+        $this->_view->load('courses/create', compact('options', 'course', 'msg_success', 'msg_error', 'levels', 'categories', 'prices'));
     }
 
     public function store()
@@ -152,7 +160,7 @@ final class coursesController extends Controller
         $course = Course::select('id')->where('title', Filter::getText('title'))->first();
 
         if ($course) {
-            Session::set('msg_error','El curso ya está registrado... intente con otro');
+            Session::set('msg_error', 'El curso ya está registrado... intente con otro');
             $this->redirect('courses/create');
         }
 
@@ -169,7 +177,7 @@ final class coursesController extends Controller
         $course->save();
 
         Session::destroy('data');
-        Session::set('msg_success','El curso se ha registrado correctamente');
+        Session::set('msg_success', 'El curso se ha registrado correctamente');
         $this->redirect('courses/index');
     }
 
@@ -192,9 +200,11 @@ final class coursesController extends Controller
             'current_link' => 'Show',
         ];
 
-        $course = Course::with(['user','level','category','price','goals'])->find(Filter::filterInt($id));
+        $course = Course::with(['user', 'level', 'category', 'price', 'goals'])->find(Filter::filterInt($id));
+        $image = Image::select('id','image')->where('imageable_id', $course->id)
+            ->where('imageable_type','Course')->first();
 
-        $this->_view->load('courses/show', compact('options','course','msg_success','msg_error'));
+        $this->_view->load('courses/show', compact('options', 'course', 'msg_success', 'msg_error','image'));
     }
 
     public function edit($id = null)
@@ -220,12 +230,12 @@ final class coursesController extends Controller
             'send' => $this->encrypt($this->getForm())
         ];
 
-        $course = Course::with(['user','level','category','price'])->find(Filter::filterInt($id));
-        $levels = Level::select('id','name')->orderBy('name')->get();
-        $categories = Category::select('id','name')->orderBy('name')->get();
-        $prices = Price::select('id','name','value')->orderBy('value')->get();
+        $course = Course::with(['user', 'level', 'category', 'price'])->find(Filter::filterInt($id));
+        $levels = Level::select('id', 'name')->orderBy('name')->get();
+        $categories = Category::select('id', 'name')->orderBy('name')->get();
+        $prices = Price::select('id', 'name', 'value')->orderBy('value')->get();
 
-        $this->_view->load('courses/create', compact('options','course','msg_success','msg_error','levels','categories','prices'));
+        $this->_view->load('courses/create', compact('options', 'course', 'msg_success', 'msg_error', 'levels', 'categories', 'prices'));
     }
 
     public function update($id = null)
@@ -252,7 +262,7 @@ final class coursesController extends Controller
         $course->save();
 
         Session::destroy('data');
-        Session::set('msg_success','El curso se ha modificado correctamente');
+        Session::set('msg_success', 'El curso se ha modificado correctamente');
         $this->redirect('courses/show/' . $id);
     }
 
@@ -260,8 +270,8 @@ final class coursesController extends Controller
     {
         list($msg_success, $msg_error) = $this->getMessages();
 
-        $category = Category::select('id')->where('ruta', $ruta)->first();
-        Validate::validateModel(Category::class, $category->id,'error/error');
+        $category = Category::select('id','name')->where('ruta', $ruta)->first();
+        Validate::validateModel(Category::class, $category->id, 'error/error');
 
 
         $options = [
@@ -276,28 +286,35 @@ final class coursesController extends Controller
                 'link' => 'admin/index'
             ],
             'model_button' => 'courses',
-            'current_link' => 'Course', 
+            'current_link' => 'Course',
             'message' => 'No hay cursos registrados'
         ];
 
-        $courses = Course::with(['user','level','category','price'])
-            ->where('status',3)
+        $courses = Course::with(['user', 'level', 'category', 'price'])
+            ->where('status', 3)
             ->where('category_id', $category->id)
-            ->orderBy('id','desc')
+            ->orderBy('id', 'desc')
             ->get();
 
-        $categories = Category::select('id','name','ruta')->orderBy('name')->get();
-        $levels = Level::select('id','name')->orderBy('name')->get();
+        foreach ($courses as $course) {
+            $image = Image::select('id', 'image')->where('imageable_id', $course->id)
+                ->where('imageable_type', 'Course')->first();
+            $course->image_id = $image->id;
+            $course->image = $image->image;
+        }
 
-        $this->_view->load('courses/coursesCategory', compact('options','courses','msg_success','msg_error','categories','levels')); 
+        $categories = Category::select('id', 'name', 'ruta')->orderBy('name')->get();
+        $levels = Level::select('id', 'name','ruta')->orderBy('name')->get();
+
+        $this->_view->load('courses/coursesCategory', compact('options', 'courses', 'msg_success', 'msg_error', 'categories', 'levels','category'));
     }
 
     public function coursesLevel($ruta = null)
     {
         list($msg_success, $msg_error) = $this->getMessages();
 
-        $level = level::select('id')->where('ruta', $ruta)->first();
-        Validate::validateModel(Level::class, $level->id,'error/error');
+        $level = level::select('id','name')->where('ruta', $ruta)->first();
+        Validate::validateModel(Level::class, $level->id, 'error/error');
 
 
         $options = [
@@ -312,19 +329,26 @@ final class coursesController extends Controller
                 'link' => 'admin/index'
             ],
             'model_button' => 'courses',
-            'current_link' => 'Course', 
+            'current_link' => 'Course',
             'message' => 'No hay cursos registrados'
         ];
 
-        $courses = Course::with(['user','level','category','price'])
-            ->where('status',3)
+        $courses = Course::with(['user', 'level', 'category', 'price'])
+            ->where('status', 3)
             ->where('level_id', $level->id)
-            ->orderBy('id','desc')
+            ->orderBy('id', 'desc')
             ->get();
 
-        $categories = Category::select('id','name','ruta')->orderBy('name')->get();
-        $levels = Level::select('id','name')->orderBy('name')->get();
+        foreach ($courses as $course) {
+            $image = Image::select('id', 'image')->where('imageable_id', $course->id)
+                ->where('imageable_type', 'Course')->first();
+            $course->image_id = $image->id;
+            $course->image = $image->image;
+        }
 
-        $this->_view->load('courses/coursesCategory', compact('options','courses','msg_success','msg_error','categories','levels')); 
+        $categories = Category::select('id', 'name', 'ruta')->orderBy('name')->get();
+        $levels = Level::select('id', 'name','ruta')->orderBy('name')->get();
+
+        $this->_view->load('courses/coursesLevel', compact('options', 'courses', 'msg_success', 'msg_error', 'categories', 'levels','level'));
     }
 }

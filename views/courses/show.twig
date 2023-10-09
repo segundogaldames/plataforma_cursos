@@ -4,103 +4,112 @@
 {% endblock %}
 
 {% block content %}
+	{% set type = 'Course' %}
 	{% include 'layout/admin/header_content.twig' %}
 	<div class="container-fluid">
 		{% include "partials/_messages.twig" %}
-		<div class="card">
-			<div class="card-header">
-				{{options.subject}}
-			</div>
-			<div class="card-body">
-				<div class="col-md-6">
-					<table class="table table-hover">
-						<tr>
-							<th>Nombre:</th>
-							<td>
-								{{course.title}}
-							</td>
-						</tr>
-						<tr>
-							<th>Subtítulo:</th>
-							<td>
-								{{course.subtitle}}
-							</td>
-						</tr>
-						<tr>
-							<th>Descripción:</th>
-							<td>
-								{{course.description}}
-							</td>
-						</tr>
-						<tr>
-							<th>Status:</th>
-							<td>
-								{% if course.status == 1 %}
-									Pendiente
-								{% else %}
-									{% if course.status == 2 %}
-										Validado
+		<div class="row">
+			<div class="card col-md-6">
+				<div class="card-header">
+					{{options.subject}}
+				</div>
+				<div class="card-body">
+					<div>
+						<table class="table table-hover">
+							<tr>
+								<th>Nombre:</th>
+								<td>
+									{{course.title}}
+								</td>
+							</tr>
+							<tr>
+								<th>Subtítulo:</th>
+								<td>
+									{{course.subtitle}}
+								</td>
+							</tr>
+							<tr>
+								<th>Descripción:</th>
+								<td>
+									{{course.description}}
+								</td>
+							</tr>
+							<tr>
+								<th>Status:</th>
+								<td>
+									{% if course.status == 1 %}
+										Pendiente
 									{% else %}
-										Publicado
+										{% if course.status == 2 %}
+											Validado
+										{% else %}
+											Publicado
+										{% endif %}
 									{% endif %}
-								{% endif %}
-							</td>
-						</tr>
-                        <tr>
-							<th>Profesor:</th>
-							<td>
-								{{course.user.name}}
-							</td>
-						</tr>
-                        <tr>
-							<th>Nivel:</th>
-							<td>
-								{{course.level.name}}
-							</td>
-						</tr>
-                        <tr>
-							<th>Categoría:</th>
-							<td>
-								{{course.category.name}}
-							</td>
-						</tr>
-                        <tr>
-							<th>Precio:</th>
-							<td>
-								$ {{course.price.value}}
-							</td>
-						</tr>
-						<tr>
-							<th>Metas:</th>
-							<td>
-								{% if course.goals is not empty %}
-									<div class="list-group">
-										{% for goal in course.goals %}
-											<a href="{{BASE}}goals/show/{{goal.id}}" class="list-group-item list-group-item-action">{{goal.name}}</a>
-										{% endfor %}
-									</div>
-								{% else %}
-									<p class="text-info">No hay metas definidas</p>
-								{% endif %}
-							</td>
-						</tr>
-						<tr>
-							<th>Creado:</th>
-							<td>
-								{{course.created_at|date('d-m-Y H:i:s')}}
-							</td>
-						</tr>
-						<tr>
-							<th>Creado:</th>
-							<td>
-								{{course.updated_at|date('d-m-Y H:i:s')}}
-							</td>
-						</tr>
-					</table>
-					<p>
-						<a href="{{BASE}}{{options.back.link}}" class="btn btn-primary btn-sm">{{options.back.name}}</a>
-						<a href="{{BASE}}goals/create/{{course.id}}" class="btn btn-success btn-sm">Agregar Meta</a>
-					</p>
+								</td>
+							</tr>
+							<tr>
+								<th>Profesor:</th>
+								<td>
+									{{course.user.name}}
+								</td>
+							</tr>
+							<tr>
+								<th>Nivel:</th>
+								<td>
+									{{course.level.name}}
+								</td>
+							</tr>
+							<tr>
+								<th>Categoría:</th>
+								<td>
+									{{course.category.name}}
+								</td>
+							</tr>
+							<tr>
+								<th>Precio:</th>
+								<td>
+									$ {{course.price.value}}
+								</td>
+							</tr>
+							<tr>
+								<th>Metas:</th>
+								<td>
+									{% if course.goals is not empty %}
+										<div class="list-group">
+											{% for goal in course.goals %}
+												<a href="{{BASE}}goals/show/{{goal.id}}" class="list-group-item list-group-item-action">{{goal.name}}</a>
+											{% endfor %}
+										</div>
+									{% else %}
+										<p class="text-info">No hay metas definidas</p>
+									{% endif %}
+								</td>
+							</tr>
+							<tr>
+								<th>Creado:</th>
+								<td>
+									{{course.created_at|date('d-m-Y H:i:s')}}
+								</td>
+							</tr>
+							<tr>
+								<th>Creado:</th>
+								<td>
+									{{course.updated_at|date('d-m-Y H:i:s')}}
+								</td>
+							</tr>
+						</table>
+						<p>
+							<a href="{{BASE}}{{options.back.link}}" class="btn btn-primary btn-sm">{{options.back.name}}</a>
+							<a href="{{BASE}}goals/create/{{course.id}}" class="btn btn-success btn-sm">Agregar Meta</a>
+							<a href="{{BASE}}images/create/{{course.id}}/{{type}}" class="btn btn-success btn-sm">Agregar Imagen</a>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="card col-md-6">
+				<div class="card-body">
+					<img src="{{BASE}}public/img/{{image.image}}" alt="" class="img-fluid">
 				</div>
 			</div>
 		</div>
